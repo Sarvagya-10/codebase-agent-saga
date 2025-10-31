@@ -17,10 +17,10 @@
     * Create your `README.md` and this `TODO.md`.
     * **Tools to Learn:** `git`, `python venv`
 
-* [ ] **Task 2: Select Target Repository**
+* ✅ **Task 2: Select Target Repository**
     * Find a medium-sized, open-source Python repository to be your test subject (e.g., `requests`, `flask`, or a smaller one).
 
-* [ ] **Task 3: Build the Cloner Script**
+* ✅ **Task 3: Build the Cloner Script**
     * Write a Python script (`ingest.py`) that can clone a repository from a given URL into a temporary directory.
     * **Tools to Learn:** `GitPython` (library)
 
