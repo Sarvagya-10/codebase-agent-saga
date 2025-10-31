@@ -11,7 +11,7 @@
 **🗓️ Deadline:** November 1 - November 6
 **Goal:** Create the "eyes" of the agent. Ingest a remote code repository and identify all target files.
 
-* [ ] **Task 1: Setup Project Skeleton**
+* ✅ **Task 1: Setup Project Skeleton**
     * Create a new Git repository for this project.
     * Set up a Python virtual environment (e.g., `python -m venv .venv`).
     * Create your `README.md` and this `TODO.md`.
@@ -168,7 +168,7 @@
 
 ---
 
-### L️ Level 8: The Frontend (The Face)
+### L🗺️ Level 8: The Frontend (The Face)
 
 **🗓️ Deadline:** December 13 - December 18
 **Goal:** Create a simple, interactive web app so others (or just you) can use your agent.
