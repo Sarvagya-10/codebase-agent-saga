@@ -1,239 +1,309 @@
-# 🚀 The Codebase Agent Saga 🚀
+# ⚔️ THE CRUSADER KNIGHT’S TRIAL ⚔️  
+## *The Codebase Agent Campaign (30-Day Siege)*
 
-**Project:** Codebase-to-API Documentation Generator Agent
-**Mission:** To build an end-to-end AI agent that can ingest a source code repository, understand its structure, and generate high-quality API documentation on command.
-**Total Sprint:** 60 Days
+> *“A knight is not judged by his vows, but by what still stands after the siege.”*
 
----
+**Mission:**  
+Forge an end-to-end AI system that ingests a codebase and generates faithful API documentation —  
+under time pressure, resource limits, and real-world constraints.
 
-### 🗺️ Level 1: The Repository Ingester
-
-**🗓️ Deadline:** November 1 - November 6
-**Goal:** Create the "eyes" of the agent. Ingest a remote code repository and identify all target files.
-
-* ✅ **Task 1: Setup Project Skeleton**
-    * Create a new Git repository for this project.
-    * Set up a Python virtual environment (e.g., `python -m venv .venv`).
-    * Create your `README.md` and this `TODO.md`.
-    * **Tools to Learn:** `git`, `python venv`
-
-* ✅ **Task 2: Select Target Repository**
-    * Find a medium-sized, open-source Python repository to be your test subject (e.g., `requests`, `flask`, or a smaller one).
-
-* ✅ **Task 3: Build the Cloner Script**
-    * Write a Python script (`ingest.py`) that can clone a repository from a given URL into a temporary directory.
-    * **Tools to Learn:** `GitPython` (library)
-
-* [ ] **Task 4: Build the File Scanner**
-    * Extend the script to walk the cloned directory and find all files with a specific extension (e.g., `.py`).
-    * The script should output a list of file paths.
-    * **Tools to Learn:** `pathlib` (for `rglob`) or `os.walk`
+**Total Campaign Length:** 30 Days  
+**Daily Commitment:** ~3 Hours  
+**Victory Condition:** A deployed, observable, defensible system
 
 ---
 
-### 🗺️ Level 2: The Semantic Chunker (AST)
+## 🏰 CAMPAIGN RULES (NON-NEGOTIABLE)
 
-**🗓️ Deadline:** November 7 - November 12
-**Goal:** Go beyond simple text splitting. Disassemble the code into its semantic building blocks. This is the most critical and novel step.
-
-* [ ] **Task 1: Understand Abstract Syntax Trees (AST)**
-    * Read about AST and how Python uses it to represent code structure.
-    * **Tools to Learn:** Python's `ast` (documentation)
-
-* [ ] **Task 2: Parse a Single File**
-    * Write a script that reads one `.py` file, parses it, and prints the tree.
-    * **Tools to Learn:** `ast.parse()`, `ast.dump()`
-
-* [ ] **Task 3: Isolate Target Nodes**
-    * Write a "visitor" or a script to traverse the tree and extract only the nodes for functions and classes.
-    * **Tools to Learn:** `ast.NodeVisitor`, `ast.FunctionDef`, `ast.ClassDef`
-
-* [ ] **Task 4: Extract Metadata & Source**
-    * For each function/class node, extract:
-        1.  The function/class name.
-        2.  The arguments (and their types, if available).
-        3.  The docstring.
-        4.  The *exact source code* of just that function/class.
-    * **Tools to Learn:** `ast.get_source_segment()` (for source code)
-
-* [ ] **Task 5: Integrate & Structure**
-    * Your pipeline from Level 1 should now output a structured `list` of `JSON` objects, where each object is a semantic "chunk" (a function or class) with its metadata.
+- One system. One codebase. One month.
+- Scope cuts are honorable. Half-built systems are not.
+- Elegance is secondary to survivability.
+- Every level must end with something that *runs*.
 
 ---
 
-### 🗺️ Level 3: The Embedding Forge
+# 🗺️ LEVEL I — THE MUSTERING OF ARMS
+### *“A knight does not march unarmed.”*
 
-**🗓️ Deadline:** November 13 - November 18
-**Goal:** Convert the semantic code chunks (text) into numerical vectors (meaning).
-
-* [ ] **Task 1: Select a Code Embedding Model**
-    * Research and choose an embedding model specialized for code (e.g., `microsoft/codebert-base`, `BAAI/bge-large-en-v1.5`).
-    * **Tools to Learn:** `Hugging Face Hub` (for finding models)
-
-* [ ] **Task 2: Load the Model**
-    * Write a script to download and load your chosen model from Hugging Face.
-    * **Tools to Learn:** `transformers.AutoTokenizer`, `transformers.AutoModel`
-
-* [ ] **Task 3: Create the Embedding Function**
-    * Write a function that takes a code snippet (from Level 2's output) and returns its vector embedding.
-    * Pay attention to mean pooling to get a single vector for the entire snippet.
-
-* [ ] **Task 4: Integrate the Pipeline**
-    * The main script now `Ingests` -> `Chunks (AST)` -> `Embeds`. The output is a list of `(metadata, vector)` tuples.
+**🗓️ Days:** 1–2  
+**Goal:** Establish the battlefield and raise the banner.
 
 ---
 
-### 🗺️ Level 4: The Vector Database (The Vault)
+* [ ] **Task 1: Raise the Banner (Project Skeleton)**
+  * Create a new Git repository
+  * Set up Python virtual environment
+  * Create `README.md` and `DECISIONS.md`
+  * Define folder structure
+  * **Arms Issued:** `git`, `python`, `venv`
 
-**🗓️ Deadline:** November 19 - November 24
-**Goal:** Build a searchable "memory" for the agent by storing all code vectors.
+* [ ] **Task 2: Choose the Enemy Fortress**
+  * Select ONE medium-sized open-source Python repository
+  * Lock it. No switching.
+  * Record why it was chosen.
 
-* [ ] **Task 1: Choose & Run the Vector DB**
-    * Select a local-first, open-source DB.
-    * **Tools to Learn:** `ChromaDB` (easiest start) or `Qdrant` / `Milvus` (via Docker)
+* [ ] **Task 3: Write the Oath of Constraints**
+  * Max cost (rough)
+  * Max scope
+  * Non-goals
+  * Time limit acknowledged
 
-* [ ] **Task 2: Connect and Create a "Collection"**
-    * Write a script to connect to your DB and create a new "collection" (e.g., named after the repository).
-
-* [ ] **Task 3: Build the "Upsert" Script**
-    * Write a script that takes the `(metadata, vector)` tuples from Level 3 and "upserts" (updates/inserts) them into the database.
-    * The `metadata` (filename, function name) is just as important as the `vector`.
-
-* [ ] **Task 4: Run the Full Indexing Pipeline**
-    * Run the complete `Ingest` -> `Chunk` -> `Embed` -> `Store` pipeline on your target repository.
+🏁 **Level Complete When:**  
+Repo clones, environment runs, constraints are written.
 
 ---
 
-### 🗺️ Level 5: The Retrieval Layer (The Seeker)
+# 🗺️ LEVEL II — THE SCOUTS AND MAPMAKERS
+### *“Know the terrain before you charge.”*
 
-**🗓️ Deadline:** November 25 - November 30
-**Goal:** Given a natural language query, find the most relevant code chunks from "The Vault."
+**🗓️ Days:** 3–4  
+**Goal:** Gain vision over the codebase.
+
+---
+
+* [ ] **Task 1: Build the Cloning Script**
+  * Clone repository from URL
+  * Store in temp directory
+  * Clean up after run
+  * **Tools:** `GitPython`
+
+* [ ] **Task 2: Scan the Terrain**
+  * Recursively find `.py` files
+  * Ignore virtual envs, tests if needed
+  * Output list of file paths
+  * **Tools:** `pathlib`, `os.walk`
+
+* [ ] **Task 3: First Intelligence Report**
+  * Count files
+  * Identify complexity hotspots
+  * Write findings in `DECISIONS.md`
+
+🏁 **Level Complete When:**  
+You can list every target file deterministically.
+
+---
+
+# 🗺️ LEVEL III — THE SCHOLARS OF CODE (AST)
+### *“Strike where the structure lies.”*
+
+**🗓️ Days:** 5–7  
+**Goal:** Break code into semantic units worthy of memory.
+
+---
+
+* [ ] **Task 1: Parse a Single Scroll**
+  * Parse one `.py` file using AST
+  * Print the tree
+  * Understand node hierarchy
+
+* [ ] **Task 2: Identify Sacred Symbols**
+  * Extract `FunctionDef` and `ClassDef`
+  * Ignore everything else
+
+* [ ] **Task 3: Extract the Relics**
+  * For each unit, extract:
+    - Name
+    - Docstring
+    - Source code
+  * **Tools:** `ast`, `ast.NodeVisitor`, `ast.get_source_segment`
+
+* [ ] **Task 4: Forge the Canonical Chunk Format**
+  * Output structured JSON:
+    ```json
+    {
+      "type": "function",
+      "name": "",
+      "file": "",
+      "docstring": "",
+      "source": ""
+    }
+    ```
+
+🏁 **Level Complete When:**  
+You can turn the entire repo into semantic chunks.
+
+---
+
+# 🗺️ LEVEL IV — THE FORGE OF MEMORY (EMBEDDINGS)
+### *“Steel remembers.”*
+
+**🗓️ Days:** 8–9  
+**Goal:** Convert meaning into vectors.
+
+---
+
+* [ ] **Task 1: Choose the Alloy**
+  * Select ONE embedding model
+  * CPU-friendly
+  * Lock the decision
+
+* [ ] **Task 2: Forge the Embedding Function**
+  * Input: code chunk
+  * Output: vector
+  * Mean pooling only
+  * **Tools:** `transformers`, `torch`
+
+* [ ] **Task 3: Bind Metadata to Steel**
+  * Preserve filename, symbol name, type
+
+🏁 **Level Complete When:**  
+Chunks become searchable vectors.
+
+---
+
+# 🗺️ LEVEL V — THE VAULT OF RELICS (VECTOR DB)
+### *“What is not stored is forgotten.”*
+
+**🗓️ Days:** 10–11  
+**Goal:** Create long-term memory.
+
+---
+
+* [ ] **Task 1: Establish the Vault**
+  * Set up local vector database
+  * **Tool of Choice:** `ChromaDB`
+
+* [ ] **Task 2: Upsert the Arsenal**
+  * Insert vectors + metadata
+  * Ensure idempotency
+
+* [ ] **Task 3: Trial Search**
+  * Query by function name
+  * Validate relevance
+
+🏁 **Level Complete When:**  
+You can retrieve meaningful code by similarity.
+
+---
+
+# 🗺️ LEVEL VI — THE SEEKER’S RITUAL (RAG)
+### *“Ask, and the vault shall answer.”*
+
+**🗓️ Days:** 12–14  
+**Goal:** Answer questions truthfully using retrieved code.
+
+---
 
 * [ ] **Task 1: Build the Query Embedder**
-    * The user's query (e.g., "how to use the user registration function?") must be embedded using the *exact same model* from Level 3.
+  * Use SAME model as code embeddings
 
-* [ ] **Task 2: Implement Similarity Search**
-    * Write a function that takes a query, embeds it, and searches the Vector DB for the "Top-K" (e.g., 5) most similar code chunks.
+* [ ] **Task 2: Retrieve Top-K Chunks**
+  * Implement similarity search
+  * Print retrieved snippets
 
-* [ ] **Task 3: Introduce the Orchestrator**
-    * Start using a framework to manage this RAG (Retrieval-Augmented Generation) flow.
-    * **Tools to Learn:** `LangChain` or `LlamaIndex` (for their `VectorStoreRetriever` abstractions)
+* [ ] **Task 3: Write the Sacred Prompt**
+  * Persona: Senior Technical Writer
+  * Rule: NO hallucinations
+  * If answer missing → say so
 
-* [ ] **Task 4: Test Retrieval**
-    * Manually test with queries like "user class" or "database connection" and print the retrieved code snippets. Are they relevant?
-
----
-
-### 🗺️ Level 6: Prompt Engineering (The Soul)
-
-**🗓️ Deadline:** December 1 - December 6
-**Goal:** Craft the "brain" and "personality" of the agent. This defines its task and output format.
-
-* [ ] **Task 1: Create the System Prompt**
-    * Write the master prompt template. It must include:
-        * **Persona:** "You are a Senior Technical Writer, an expert in Python."
-        * **Task:** "You will be given a user's question and several relevant code snippets. Your job is to write clear, concise API documentation answering the question."
-        * **Rules:** "ONLY use the provided code snippets. Do NOT invent functions. If the answer is not in the snippets, say so."
-
-* [ ] **Task 2: Create the User Prompt Template**
-    * This template will dynamically include the user's question and the retrieved code chunks (from Level 5).
-    * **Tools to Learn:** `LangChain` (for `PromptTemplate` / `ChatPromptTemplate`)
-
-* [ ] **Task 3: Enforce Structured Output (Advanced)**
-    * Instead of just Markdown, try to force the LLM to output a `JSON` object.
-    * **Tools to Learn:** `Pydantic` (for defining the output schema)
+* [ ] **Task 4: CLI Invocation**
+  ```bash
+  python ask.py "How does authentication work?"
+🏁 **Level Complete When:**  
+End-to-end RAG works via command line.
 
 ---
 
-### 🗺️ Level 7: The LLM (The Voice)
+## 🗺️ LEVEL VII — THE HERALD’S VOICE (LLM)
+> *“Words are weapons.”*
 
-**🗓️ Deadline:** December 7 - December 12
-**Goal:** Connect all the pieces to a Large Language Model to generate the final answer.
-
-* [ ] **Task 1: Get LLM Access**
-    * Get an API key for a model (e.g., `OpenAI`, `Anthropic`, `Gemini`).
-    * (Alternatively, set up a local model with `Ollama` and `Llama 3`).
-
-* [ ] **Task 2: Build the "RAG Chain"**
-    * Using your orchestrator, chain all the steps together:
-        1.  `Input(Question)` ->
-        2.  `Retrieve(Code Chunks)` ->
-        3.  `Format(Prompt)` ->
-        4.  `Invoke(LLM)` ->
-        5.  `Parse(Output)`
-    * **Tools to Learn:** `LangChain Expression Language (LCEL)`
-
-* [ ] **Task 3: Run End-to-End!**
-    * Run your first *full query* from a command-line script. Input a question, and watch it print the generated documentation. This is the "Hello, World!" moment for your agent.
+**🗓️ Days:** 15–16  
+**Goal:** Generate faithful documentation.
 
 ---
 
-### L🗺️ Level 8: The Frontend (The Face)
+* [ ] **Task 1: Connect to an LLM**
+  * API-based or local
+  * Record cost assumptions
 
-**🗓️ Deadline:** December 13 - December 18
-**Goal:** Create a simple, interactive web app so others (or just you) can use your agent.
+* [ ] **Task 2: Chain the Ritual**
+  * Query → Retrieve → Prompt → Generate
 
-* [ ] **Task 1: Design the UI**
-    * Plan a simple UI: Title, text input for GitHub URL, "Ingest" button, text input for query, "Generate" button, and a display area.
+* [ ] **Task 3: Hallucination Trials**
+  * Ask unanswerable questions
+  * Confirm refusal behavior
 
-* [ ] **Task 2: Build the UI**
-    * Use the fastest, easiest tool for the job.
-    * **Tools to Learn:** `Streamlit`
-
-* [ ] **Task 3: Manage State**
-    * The "Ingest" button needs to run the Level 4 pipeline and *save* the resulting RAG chain. This is the hardest part of the frontend.
-    * **Tools to Learn:** `Streamlit` (specifically `st.session_state` to store the agent)
-
-* [ ] **Task 4: Connect the Agent**
-    * Wire the "Generate" button to call the `agent.invoke()` method from Level 7 and display the streaming response in the UI.
+🏁 **Level Complete When:**  
+The agent speaks only what the code supports.
 
 ---
 
-### 🗺️ Level 9: Observability & Evaluation (The Conscience)
+## 🗺️ LEVEL VIII — THE BANNER OF INTERFACE (UI)
+> *“Let others witness your work.”*
 
-**🗓️ Deadline:** December 19 - December 24
-**Goal:** Move from "it works" to "I know *how* and *why* it works."
-
-* [ ] **Task 1: Set Up Tracing**
-    * Integrate an observability tool to see the agent's internal thought process (e.g., what chunks did it retrieve? what was the exact prompt?).
-    * **Tools to Learn:** `LangSmith` (it's built for LangChain and is free to start)
-
-* [ ] **Task 2: Run Traced Queries**
-    * Use your Streamlit app and watch the traces appear in your LangSmith dashboard. Debug any strange or inefficient steps.
-
-* [ ] **Task 3: Create a "Golden Set"**
-    * Create a small test file (`test_queries.json`) with 5-10 questions and the "perfect" answers you'd expect.
-
-* [ ] **Task 4: Run Basic Evaluation**
-    * Run your agent against the "Golden Set" and manually score its `Faithfulness` (did it hallucinate?) and `Answer Relevance`.
+**🗓️ Days:** 17–19  
+**Goal:** Make the system usable.
 
 ---
 
-### 🗺️ Level 10: Infra & Deployment (The World)
+* [ ] **Task 1: Build the Backend API**
+  * `/ingest`
+  * `/query`
+  * **Tool:** FastAPI
 
-**🗓️ Deadline:** December 25 - December 30
-**Goal:** Package your agent to be run anywhere, by anyone. This is the final boss.
+* [ ] **Task 2: Build the War Table (UI)**
+  * Repo input
+  * Query input
+  * Output display
+  * **Tool:** Streamlit
 
-* [ ] **Task 1: Decouple UI from Backend**
-    * Rewrite the agent logic (Level 7) as a self-contained API.
-    * **Tools to Learn:** `FastAPI` (to create endpoints like `/ingest` and `/query`)
+* [ ] **Task 3: State Management**
+  * Persist loaded agent
+  * Prevent accidental resets
 
-* [ ] **Task 2: Containerize the Backend**
-    * Write a `Dockerfile` for your FastAPI application.
-    * **Tools to Learn:** `Docker`
-
-* [ ] **Task 3: Containerize the Full Stack**
-    * Write a `docker-compose.yml` file that launches *two* services:
-        1.  Your FastAPI app.
-        2.  Your Vector Database (e.g., the official `qdrant/qdrant` or `milvusdb/milvus` image).
-    * **Tools to Learn:** `Docker Compose`
-
-* [ ] **Task 4: Deploy!**
-    * (Stretch Goal) Deploy your containerized application to a cloud service.
-    * **Tools to Learn:** `AWS (ECS/Fargate)`, `GCP (Cloud Run)`, or `Hugging Face Spaces`
+🏁 **Level Complete When:**  
+A stranger can use the system.
 
 ---
 
-## 🏆 PROJECT COMPLETE (December 31, 2025) 🏆
+## 🗺️ LEVEL IX — THE WATCHTOWER (OBSERVABILITY)
+> *“What you cannot see will kill you.”*
 
-You did it. You've not only learned 10 distinct, high-demand technologies, but you've *integrated* them into a single, complex, and incredibly impressive portfolio project. You are no longer just a "student"; you are an AI Engineer.
+**🗓️ Days:** 20–23  
+**Goal:** Understand system behavior.
+
+---
+
+* [ ] **Task 1: Add Tracing / Logging**
+  * Retrieved chunks
+  * Prompt
+  * Response
+
+* [ ] **Task 2: Create the Golden Scrolls**
+  * 5–7 test questions
+  * Expected answers
+
+* [ ] **Task 3: Run Evaluation**
+  * Faithfulness
+  * Relevance
+  * Failure modes
+
+🏁 **Level Complete When:**  
+You can explain **why** answers are good or bad.
+
+---
+
+## 🗺️ LEVEL X — THE FINAL SIEGE (DEPLOYMENT)
+> *“What survives the world is truth.”*
+
+**🗓️ Days:** 24–30  
+**Goal:** Package, deploy, and defend.
+
+---
+
+* [ ] **Task 1: Containerize the Backend**
+  * Write `Dockerfile`
+
+* [ ] **Task 2: Compose the Army**
+  * Backend + Vector DB
+  * `docker-compose.yml`
+
+* [ ] **Task 3: One-Command Victory**
+  ```bash
+  docker-compose up
+* [ ] **Task 4: Write the Chronicle**
+  
+   * Honest README
+   * Known limitations
+   * Design decisions
+   * What you would change next campaign
